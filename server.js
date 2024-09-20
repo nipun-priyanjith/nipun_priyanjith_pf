@@ -12,7 +12,7 @@ const fs = require('fs');
 const Project = require('./models/Project');
 
 const app = express();
-
+const PORT = process.env.PORT || 5000;
 
 //UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 app.get('/', (req, res) => {
