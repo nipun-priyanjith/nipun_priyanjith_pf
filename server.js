@@ -1,4 +1,3 @@
-// server/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors'); // Import cors
@@ -12,7 +11,7 @@ const fs = require('fs');
 const Project = require('./models/Project');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;  // Declare PORT here only
 
 //UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 app.get('/', (req, res) => {
@@ -22,7 +21,6 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
 
 // Connect to MongoDB
 connectDB();
@@ -46,19 +44,6 @@ app.use('/api', (req, res, next) => {
 
 app.use('/api/auth', authRoutes);
 
-
-// app.use('/api/experiences', (req, res, next) => {
-//     console.log("User entered experienceRoutes data"); // Print message when a request is made to /api/experiences
-    
-//     // Log useful details of the request
-//     console.log(`Request URL: ${req.url}`);
-//     console.log(`Request Method: ${req.method}`);
-//     console.log(`Request Headers: ${JSON.stringify(req.headers)}`);
-//     console.log(`Request Body: ${JSON.stringify(req.body)}`);
-    
-//     next(); // Pass the request to the next middleware/route handler
-// }, experienceRoutes);
-
 app.use('/api/experiences', (req, res, next) => {
     console.log("User entered experienceRoutes data"); // Print message when a request is made to /api/experiences
     
@@ -70,19 +55,6 @@ app.use('/api/experiences', (req, res, next) => {
     
     next(); // Pass the request to the next middleware/route handler
 }, experienceRoutes);
-
-
-
-
-
-
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-
-
-
 
 // Setup Multer for file uploads (storing files in memory)
 const storage = multer.memoryStorage();
@@ -136,17 +108,6 @@ app.post('/api/projects/uploadfiles', upload.array('myFiles'), async (req, res) 
 });
 
 // Route to Fetch Projects with Images
-// app.get('/api/projects', async (req, res) => {
-//   try {
-//     const projects = await Project.find({});
-//     res.json(projects);
-//   } catch (error) {
-//     console.error('Error fetching projects:', error);
-//     res.status(500).json({ message: 'Error fetching projects', error });
-//   }
-// });
-
-// server/server.js
 app.get('/api/projects', async (req, res) => {
   try {
     const projects = await Project.find({});
@@ -165,19 +126,4 @@ app.get('/api/projects', async (req, res) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-const PORT = process.env.PORT ;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));  // Use the same PORT declared earlier
