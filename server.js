@@ -13,6 +13,17 @@ const Project = require('./models/Project');
 
 const app = express();
 
+
+//UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+app.get('/', (req, res) => {
+  res.send('Hello from Vercel!');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+
 // Connect to MongoDB
 connectDB();
 
