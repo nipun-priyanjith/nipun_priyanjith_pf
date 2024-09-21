@@ -24,8 +24,14 @@ connectDB();
 // app.use(cors()); // Enable CORS for all requests
 // Middleware
 app.use(cors({
-  origin: 'https://nipun-priyanjith-portfolio.vercel.app'
+  origin: 'https://nipun-priyanjith-portfolio.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
+  credentials: true // Allow cookies or auth headers
 }));
+
+// Preflight OPTIONS request handling
+app.options('*', cors()); // For preflight requests
 
 app.use(express.json()); // For parsing application/json
 
@@ -45,17 +51,6 @@ app.use('/api', (req, res, next) => {
 app.use('/api/auth', authRoutes);
 
 
-// app.use('/api/experiences', (req, res, next) => {
-//     console.log("User entered experienceRoutes data"); // Print message when a request is made to /api/experiences
-    
-//     // Log useful details of the request
-//     console.log(`Request URL: ${req.url}`);
-//     console.log(`Request Method: ${req.method}`);
-//     console.log(`Request Headers: ${JSON.stringify(req.headers)}`);
-//     console.log(`Request Body: ${JSON.stringify(req.body)}`);
-    
-//     next(); // Pass the request to the next middleware/route handler
-// }, experienceRoutes);
 
 app.use('/api/experiences', (req, res, next) => {
     console.log("User entered experienceRoutes data"); // Print message when a request is made to /api/experiences
@@ -74,9 +69,7 @@ app.use('/api/experiences', (req, res, next) => {
 
 
 
-// Middleware
-app.use(cors());
-app.use(express.json());
+
 
 
 
@@ -133,16 +126,7 @@ app.post('/api/projects/uploadfiles', upload.array('myFiles'), async (req, res) 
   }
 });
 
-// Route to Fetch Projects with Images
-// app.get('/api/projects', async (req, res) => {
-//   try {
-//     const projects = await Project.find({});
-//     res.json(projects);
-//   } catch (error) {
-//     console.error('Error fetching projects:', error);
-//     res.status(500).json({ message: 'Error fetching projects', error });
-//   }
-// });
+
 
 // server/server.js
 app.get('/api/projects', async (req, res) => {
