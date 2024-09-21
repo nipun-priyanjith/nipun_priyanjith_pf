@@ -23,11 +23,13 @@ connectDB();
 // Middleware
 // app.use(cors()); // Enable CORS for all requests
 // Middleware
-app.use(cors({
-  origin: 'https://nipun-priyanjith-portfolio.vercel.app', // Allow only your client domain
+const corsOptions = {
+  origin: 'https://nipun-priyanjith-portfolio.vercel.app', // Your client URL
   methods: ['GET', 'POST'], // Specify allowed methods
   credentials: true // Allow credentials (if needed)
-}));
+};
+
+app.use(cors(corsOptions)); // Enable CORS with specified options
 app.use(express.json()); // For parsing application/json
 
 // Routes
