@@ -23,7 +23,10 @@ connectDB();
 // Middleware
 // app.use(cors()); // Enable CORS for all requests
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://nipun-priyanjith-portfolio.vercel.app'
+}));
+
 app.use(express.json()); // For parsing application/json
 
 // Routes
