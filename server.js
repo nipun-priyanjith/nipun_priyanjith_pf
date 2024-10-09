@@ -24,7 +24,7 @@ connectDB();
 // app.use(cors()); // Enable CORS for all requests
 // Middleware
 app.use(cors({
-  origin: 'https://nipun-priyanjith-portfolio.vercel.app',
+  origin: ['https://nipun-priyanjith-portfolio.vercel.app', 'http://localhost:3000'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow specific HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
   credentials: true // Allow cookies or auth headers
